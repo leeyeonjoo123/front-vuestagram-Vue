@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: "Component",
+  name: "Container",
 };
 </script>
 <style></style>
