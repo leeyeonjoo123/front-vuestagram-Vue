@@ -7,6 +7,8 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "Component",
+};
 </script>
 <style></style>
