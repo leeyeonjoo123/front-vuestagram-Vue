@@ -1,9 +1,7 @@
 <template>
   <div>
     컨테이너에요
-    <Post :posting="posting[0]" />
-    <Post :posting="posting[1]" />
-    <Post :posting="posting[2]" />
+    <Post :posting="posting[i]" v-for="(a, i) in posting" :key="i" />
   </div>
 </template>
 <script>

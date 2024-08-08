@@ -4,7 +4,10 @@
       <div class="profile"></div>
       <span class="profile-name">{{ posting.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${posting.postImage})` }"
+    ></div>
     <div class="post-content">
       <p>{{ posting.likes }}</p>
       <p>
