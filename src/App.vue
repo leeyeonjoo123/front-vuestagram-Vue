@@ -8,8 +8,8 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-
-  <Container />
+  <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
+  <Container :posting="posting" />
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -21,9 +21,15 @@
 
 <script>
 import Container from "./components/Container.vue";
+import postdata from "./assets/postdata.js";
 
 export default {
   name: "App",
+  data() {
+    return {
+      posting: postdata,
+    };
+  },
   components: {
     Container,
   },

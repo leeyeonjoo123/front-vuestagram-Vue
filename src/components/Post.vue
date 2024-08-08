@@ -2,12 +2,14 @@
   <div class="post">
     <div class="post-header">
       <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <span class="profile-name">{{ posting.name }}</span>
     </div>
     <div class="post-body"></div>
     <div class="post-content">
-      <p>43 Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
+      <p>{{ posting.likes }}</p>
+      <p>
+        <strong>{{ posting.name }}</strong> {{ posting.content }}
+      </p>
       <p class="date">May 15</p>
     </div>
   </div>
@@ -15,6 +17,9 @@
 <script>
 export default {
   name: "Post",
+  props: {
+    posting: Object,
+  },
 };
 </script>
 <style>
