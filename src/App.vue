@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
   <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
-  <Container :posting="posting" />
+  <Container :posting="posting" :step="step" />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -31,6 +31,7 @@ export default {
     return {
       posting: postdata,
       moreClick: 0,
+      step: 2,
     };
   },
   components: {
