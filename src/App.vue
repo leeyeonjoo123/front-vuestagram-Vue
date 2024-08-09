@@ -10,6 +10,7 @@
   </div>
   <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
   <Container :posting="posting" />
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -29,10 +30,24 @@ export default {
   data() {
     return {
       posting: postdata,
+      moreClick: 0,
     };
   },
   components: {
     Container,
+  },
+  methods: {
+    more() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.moreClick}.json`)
+        .then((result) => {
+          this.posting.push(result.data);
+          this.moreClick++;
+        })
+        .catch((err) => {
+          alert("더 보기가 실패하였습니다. 잠시후에 시도해주세요");
+        });
+    },
   },
 };
 </script>
