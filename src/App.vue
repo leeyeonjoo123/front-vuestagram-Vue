@@ -4,12 +4,18 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="step++">Next</li>
+      <li @click="step++" v-if="step == 1">Next</li>
+      <li @click="publish" v-if="step == 2">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
   <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
-  <Container :posting="posting" :step="step" :image="image" />
+  <Container
+    :posting="posting"
+    :step="step"
+    :image="image"
+    @write="mycontent = $event"
+  />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -40,6 +46,7 @@ export default {
       moreClick: 0,
       step: 0,
       image: "",
+      mycontent: "",
     };
   },
   components: {
@@ -67,6 +74,20 @@ export default {
       this.step++;
       console.log(url);
       console.log(this.step);
+    },
+    publish() {
+      var myposting = {
+        name: "Kim Coco",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.image,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.mycontent,
+        filter: "perpetua",
+      };
+      this.posting.unshift(myposting);
+      this.step = 0;
     },
   },
 };
