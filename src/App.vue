@@ -4,17 +4,24 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
   <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
-  <Container :posting="posting" :step="step" />
+  <Container :posting="posting" :step="step" :image="image" />
   <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input
+        @change="upload"
+        multiple
+        accept="image/*"
+        type="file"
+        id="file"
+        class="inputfile"
+      />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -31,7 +38,8 @@ export default {
     return {
       posting: postdata,
       moreClick: 0,
-      step: 2,
+      step: 0,
+      image: "",
     };
   },
   components: {
@@ -48,6 +56,17 @@ export default {
         .catch((err) => {
           alert("더 보기가 실패하였습니다. 잠시후에 시도해주세요");
         });
+    },
+    upload(e) {
+      console.log("이미지");
+      //업로드한 파일을 리스트로 알려준다.[] array처럼 사용하면 됨
+      let file = e.target.files;
+      //브라우저 끄면 없어지는 임시 URL
+      let url = URL.createObjectURL(file[0]);
+      this.image = url;
+      this.step++;
+      console.log(url);
+      console.log(this.step);
     },
   },
 };

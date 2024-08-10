@@ -4,9 +4,12 @@
     <div v-if="step == 0">
       <Post :posting="posting[i]" v-for="(a, i) in posting" :key="i" />
     </div>
-    <!-- 필터선택페이지-->
+    <!-- 필터선택페이지 step == 1 이면 보임-->
     <div v-if="step == 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="`background-image: url(${image})`"
+      ></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -18,7 +21,10 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        style="`background-image: url(${image}) `"
+      ></div>
       <div class="write">
         <textarea class="write-box">write!</textarea>
       </div>
@@ -32,10 +38,11 @@ export default {
   components: {
     Post,
   },
-  //props 등록할때, 데이터형식도 넣어줌
+  //props 등록할 때, 이름:데이터형식
   props: {
     posting: Array,
     step: Number,
+    image: String,
   },
 };
 </script>
