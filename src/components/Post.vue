@@ -5,12 +5,15 @@
       <span class="profile-name">{{ posting.name }}</span>
     </div>
     <div
+      @click="$store.commit('likesUp')"
       :class="posting.filter"
       class="post-body"
       :style="{ backgroundImage: `url(${posting.postImage})` }"
     ></div>
     <div class="post-content">
-      <p>{{ posting.likes }}</p>
+      <p>
+        {{ $store.state.likes }}
+      </p>
       <p>
         <strong>{{ posting.name }}</strong> {{ posting.content }}
       </p>
