@@ -7,21 +7,25 @@
     <!-- 필터선택페이지 step == 1 이면 보임-->
     <div v-if="step == 1">
       <div
+        :class="filterPicked"
         class="upload-image"
         :style="`background-image: url(${image})`"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          :filter="filter"
+          :image="image"
+          v-for="filter in filters"
+          :key="filter"
+          >{{ filter }}
+        </FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
       <div
+        :class="filterPicked"
         class="upload-image"
         :style="`background-image: url(${image}) `"
       ></div>
@@ -38,16 +42,58 @@ write!</textarea
 </template>
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
+
 export default {
   name: "Container",
+  data() {
+    return {
+      filters: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+      filterPicked: "",
+    };
+  },
+  mounted() {
+    this.emitter.on("filterApply", (a) => {
+      this.filterPicked = a;
+    });
+  },
   components: {
     Post,
+    FilterBox,
   },
   //props 등록할 때, 이름:데이터형식
   props: {
     posting: Array,
     step: Number,
     image: String,
+    filter: String,
   },
 };
 </script>

@@ -5,7 +5,7 @@
     </ul>
     <ul class="header-button-right">
       <li @click="step++" v-if="step == 1">Next</li>
-      <li @click="publish" v-if="step == 2">발행</li>
+      <li :class="filterPicked" @click="publish" v-if="step == 2">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
@@ -47,7 +47,13 @@ export default {
       step: 0,
       image: "",
       mycontent: "",
+      filterPicked: "",
     };
+  },
+  mounted() {
+    this.emitter.on("filterApply", (a) => {
+      this.filterPicked = a;
+    });
   },
   components: {
     Container,
@@ -84,10 +90,12 @@ export default {
         date: "May 15",
         liked: false,
         content: this.mycontent,
-        filter: "perpetua",
+        filter: this.filterPicked,
       };
       this.posting.unshift(myposting);
+      console.log(this.filterPicked);
       this.step = 0;
+      console.log("step reset" + this.filterPicked);
     },
   },
 };
