@@ -5,7 +5,7 @@ const store = createStore({
   state() {
     //모든 컴포넌트에서 사용가능, 사용방법 :  {{ $store.state.데이터명}}
     return {
-      likes: 0,
+      likes: 300,
       likesState: false,
       more: {},
     };

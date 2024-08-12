@@ -8,9 +8,10 @@
       <li :class="filterPicked" @click="publish" v-if="step == 2">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
+    <p>{{ newLikesNaming }} {{ age }} {{ name }}</p>
   </div>
-  <p>{{ $store.state.more }}</p>
-  <button @click="$store.dispatch('getData')">더보기버튼</button>
+  <!-- <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기버튼</button> -->
 
   <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
   <Container
@@ -40,6 +41,7 @@
 import Container from "./components/Container.vue";
 import postdata from "./assets/postdata.js";
 import axios from "axios";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "App",
@@ -61,7 +63,20 @@ export default {
   components: {
     Container,
   },
+  //처음에만 실행되고 값을 간직함.
+  computed: {
+    name() {
+      return this.$store.state.name;
+    },
+    //state를 간단하게 쓸 수 있다.
+    ...mapState(["name", "age"]),
+    //state 명을 바꿔서 사용 가능
+    ...mapState({ newLikesNaming: "likes" }),
+  },
   methods: {
+    //mutations 함수들 간단하게 쓰기
+    ...mapMutations(["setMore", "likesUp"]),
+
     more() {
       axios
         .get(`https://codingapple1.github.io/vue/more${this.moreClick}.json`)
