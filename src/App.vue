@@ -9,6 +9,9 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기버튼</button>
+
   <!-- props 보내려면 :보낼작명="이름"등록하고 쓰고 -->
   <Container
     :posting="posting"

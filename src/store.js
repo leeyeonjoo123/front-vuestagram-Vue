@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import axios from "axios";
 
 const store = createStore({
   state() {
@@ -19,8 +20,20 @@ const store = createStore({
         state.likesState = false;
       }
     },
+    setMore(state, data) {
+      state.more = data;
+    },
   },
-  actions: {},
+  actions: {
+    getData(context) {
+      axios
+        .get("https://codingapple1.github.io/vue/more0.json")
+        .then((result) => {
+          console.log(result.data);
+          context.commit("setMore", result.data);
+        });
+    },
+  },
 });
 
 export default store;
